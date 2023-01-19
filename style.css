@@ -1,3 +1,7 @@
+
+.container{
+    display: flex;
+}
 .grid{
     width: 200px;
     height: 400px;
@@ -12,11 +16,21 @@
     width: 20px;
     height:20px;
 }
-/* 
-.taken{
-    background-color: #F5EA5A;
-} */
 
 .tetrimino{
     background-color: #F5EA5A;
+}
+
+.mini-grid{
+    margin: 50px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #39B5E0;
+}
+
+.mini-grid div{
+    width: 80px;
+    height: 80px;
 }
