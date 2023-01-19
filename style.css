@@ -1,7 +1,7 @@
 .grid{
     width: 200px;
     height: 400px;
-    background-color: #aeb8fe;
+    background-color: #39B5E0;
     display:flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -11,5 +11,8 @@
 
     width: 20px;
     height: 20px;
-    background-color: #758bfd;
+}
+
+.tetrimino{
+    background-color: #F5EA5A;
 }
