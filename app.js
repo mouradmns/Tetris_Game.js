@@ -58,7 +58,6 @@ document.addEventListener('DOMContentLoaded' ,()=>{
       let current = theTetriminoes[random][currentRotation]
 
 
-      console.log(random)
     //function to draw the tetriminoes 
     function draw(){
         current.forEach(index =>{
@@ -72,8 +71,67 @@ document.addEventListener('DOMContentLoaded' ,()=>{
         current.forEach(index =>{
             squares[currentPosition + index].classList.remove('tetrimino')
         })
+    }
+
+
+    // function : move down the tt:
+    timeId = setInterval(moveDown,100)
+    //key listnner:
+
+    function control(e){
+        if(e.keyCode===37) { moveLeft()}
+    }   
+
+    document.addEventListener('keyup',control)
+
+
+
+    function moveDown(){
+        unDraw()
+        currentPosition+=width
+        draw()
+        freeze();
+    }
+
+    // stop the tt at the block
+    function freeze(){
+        //condition : stop when the the dives has class of "taken" (the last row of divs)
+        if(current.some(index=> squares[currentPosition +index + width].classList.contains('taken'))){
+            current.forEach(index=>squares[currentPosition +index ].classList.add('taken'))
+        
+        // create a new tt to loop (undraw->draw) on it 
+          currentPosition = 4
+          random = Math.floor(Math.random()*theTetriminoes.length)
+          current = theTetriminoes[random][currentRotation]
+          draw()
+    
+        }
+        }
+        
+
+        function moveLeft(){
+            unDraw()
+            const isAtLeftEdge=current.some(index=> (currentPosition + index) % width ===0)
+
+            if(!isAtLeftEdge){currentPosition-=1}
+
+            if(current.some(index => squares[currentPosition+index].classList.contains('.taken')))
+                {currentPosition+=1}
+            
+            draw()
+
+        }
+
+
+
+
+
+
+
+
+})
+
     
     
 
     
-})

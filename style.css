@@ -10,8 +10,12 @@
 .grid div {
 
     width: 20px;
-    height: 20px;
+    height:20px;
 }
+/* 
+.taken{
+    background-color: #F5EA5A;
+} */
 
 .tetrimino{
     background-color: #F5EA5A;
