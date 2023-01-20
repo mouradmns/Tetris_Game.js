@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded' ,()=>{
     let squares = Array.from(document.querySelectorAll('.grid div'));
     const scoreDisplay = document.querySelector('#score');
     const startBtn = document.querySelector('#start-button');
-
+    let nextRandom=0
 
     // create the tetriminos shapes :
     const width =10;
@@ -96,6 +96,7 @@ document.addEventListener('DOMContentLoaded' ,()=>{
         unDraw()
         currentPosition+=width
         draw()
+        // create a new tt to loop (undraw->draw) on it 
         freeze();
     }
 
@@ -105,12 +106,13 @@ document.addEventListener('DOMContentLoaded' ,()=>{
         if(current.some(index=> squares[currentPosition +index + width].classList.contains('taken'))){
             current.forEach(index=>squares[currentPosition +index ].classList.add('taken'))
         
-        // create a new tt to loop (undraw->draw) on it 
           currentPosition = 4
-          random = Math.floor(Math.random()*theTetriminoes.length)
+          random = nextRandom
+          nextRandom=Math.floor(Math.random()*theTetriminoes.length)
           current = theTetriminoes[random][currentRotation]
           draw()
-    
+          displayShape()
+
         }
         }
         
@@ -147,7 +149,7 @@ document.addEventListener('DOMContentLoaded' ,()=>{
         function rotate(){
             unDraw()
             currentRotation++
-            if(currentRotation==current.length){currentRotation=0}
+            if(currentRotation==current.length){currentRotation=0}   
             current=theTetriminoes[random][currentRotation]
             draw()
         }
@@ -155,8 +157,31 @@ document.addEventListener('DOMContentLoaded' ,()=>{
 
 
 
+        // show the next tt :
+
+        const displaySquares = document.querySelectorAll(".mini-grid div")
+
+        const displayWidth =4
+        const displayindex=0
+      
+
+        const upNextTetrominoes = [
+            [1, displayWidth+1, displayWidth*2+1, 2], //lTetromino
+            [0, displayWidth, displayWidth+1, displayWidth*2+1], //zTetromino
+            [1, displayWidth, displayWidth+1, displayWidth+2], //tTetromino
+            [0, 1, displayWidth, displayWidth+1], //oTetromino
+            [1, displayWidth+1, displayWidth*2+1, displayWidth*3+1] //iTetromino
+          ]
 
 
+          //function to display the shape:
+          function displayShape(){
+            displaySquares.forEach(square=>{    
+                square.classList.remove('tetrimino')
+            })
+
+            upNextTetrominoes[nextRandom].forEach(index=>{displaySquares[displayindex+index].classList.add('tetrimino')})
+          }
 
 
 
